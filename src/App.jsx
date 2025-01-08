@@ -1,9 +1,33 @@
-import { useState } from "react";
+/* import { useState } from "react";
 import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import viteLogo from "/vite.svg"; */
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 import "./App.css";
 
-function App() {
+function Auth() {
+  const googleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      console.log(tokenResponse);
+      const userInfo = await axios.get(
+        "https://www.googleapis.com/oauth2/v3/userinfo",
+        { headers: { Authorization: "Bearer <tokenResponse.access_token>" } }
+      );
+
+      console.log(userInfo);
+    },
+    onError: (errorResponse) => console.log(errorResponse),
+  });
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h1>Google OAuth Testing</h1>
+      <button onClick={() => googleLogin()}>Login with Google</button>
+    </div>
+  );
+}
+
+/* function App() {
   const [count, setCount] = useState(0);
 
   return (
@@ -32,6 +56,7 @@ function App() {
       <p>Hot-reloading is cool! Yes it is</p>
     </>
   );
-}
+} */
 
-export default App;
+//export default App;
+export default Auth;
