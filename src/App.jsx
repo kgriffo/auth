@@ -1,23 +1,34 @@
 /* import { useState } from "react";
 import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg"; */
-import { GoogleLogin } from "@react-oauth/google";
+import viteLogo from "/vite.svg";
+import { GoogleLogin } from "@react-oauth/google"; */
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 import "./App.css";
 
 function Auth() {
+  const googleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      if (tokenResponse.authuser == "0") {
+        console.log("Not an authorized user; login failed.");
+        alert("Not an authorized user; login failed.");
+        return;
+      }
+      console.log(tokenResponse);
+      const userInfo = await axios.get(
+        "https://www.googleapis.com/oauth2/v3/userinfo",
+        { headers: { Authorization: `Bearer ${tokenResponse.access_token}` } }
+      );
+
+      console.log(userInfo);
+      alert("Login successful!");
+    },
+    onError: (errorResponse) => console.log(errorResponse),
+  });
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>Google OAuth Testing</h1>
-      <div style={{ display: "inline-block" }}>
-        <GoogleLogin
-          onSuccess={(credentialResponse) => {
-            console.log(credentialResponse);
-          }}
-          onError={() => {
-            console.log("Login Failed");
-          }}
-        />
-      </div>
+      <h1>Google OAuth Test</h1>
+      <button onClick={() => googleLogin()}>Login with Google</button>
     </div>
   );
 }
