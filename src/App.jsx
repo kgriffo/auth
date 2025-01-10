@@ -10,13 +10,10 @@ function Auth() {
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       if (tokenResponse.authuser == "0") {
-        return;
-      }
-      if (tokenResponse.authuser == "0") {
         console.log("Not an authorized user; login failed.");
         alert("Not an authorized user; login failed.");
+        return;
       }
-
       console.log(tokenResponse);
       const userInfo = await axios.get(
         "https://www.googleapis.com/oauth2/v3/userinfo",
