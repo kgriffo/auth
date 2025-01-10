@@ -12,8 +12,8 @@ function Auth() {
       if (tokenResponse.authuser == "0") {
         return;
       }
-      console.log("Not an authorized user; login failed.");
-      alert("Not an authorized user; login failed.");
+      //console.log("Not an authorized user; login failed.");
+      //alert("Not an authorized user; login failed.");
 
       console.log(tokenResponse);
       const userInfo = await axios.get(
