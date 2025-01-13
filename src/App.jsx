@@ -15,8 +15,9 @@ function Auth() {
         console.log(userInfo);
         alert("Login successful!");
       } else {
-        console.log("Unauthorized user; login failed.");
-        alert("Unauthorized user; login failed.");
+        return;
+        //console.log("Unauthorized user; login failed.");
+        //alert("Unauthorized user; login failed.");
       }
     },
     onError: (errorResponse) => console.log(errorResponse),
