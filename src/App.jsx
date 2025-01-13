@@ -16,8 +16,10 @@ function Auth() {
         alert("Login successful!");
       } else {
         console.log("Unauthorized user; login failed.");
-        alert("Unauthorized user; login failed.");
-        return;
+        // Timeout needed to ensure Google login pop-up closes before alert appears
+        setTimeout(() => {
+          alert("Unauthorized user; login failed.");
+        }, 100);
       }
     },
     onError: (errorResponse) => console.log(errorResponse),
