@@ -1,10 +1,9 @@
 import "./App.css";
 import axios from "axios";
-import { google } from "google";
 import { useGoogleLogin } from "@react-oauth/google";
 
 function Auth() {
-  const client = google.accounts.oauth2.initTokenClient({
+  const client = window.google.accounts.oauth2.initTokenClient({
     client_id:
       "248005865613-j5nc0j164et50emv7g18ap21l64bi07q.apps.googleusercontent.com",
     callback: "onTokenResponse",
