@@ -1,8 +1,14 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import "./App.css";
+import google from "react-oauth/google";
 
+// gkjhgjh
 function Auth() {
+  const client = google.accounts.oauth2.initTokenClient({
+    client_id:
+      "248005865613-j5nc0j164et50emv7g18ap21l64bi07q.apps.googleusercontent.com",
+  });
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       if (tokenResponse.authuser == "1") {
@@ -27,7 +33,8 @@ function Auth() {
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
       <h1>Google OAuth Test</h1>
-      <button onClick={() => googleLogin()}>Login with Google</button>
+      <button onClick="client.requestAccessToken();">Authorize me</button>
+      {/* <button onClick={() => googleLogin()}>Login with Google</button> */}
     </div>
   );
 }
