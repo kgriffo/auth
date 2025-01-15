@@ -7,7 +7,6 @@ function Auth() {
     client_id:
       "248005865613-j5nc0j164et50emv7g18ap21l64bi07q.apps.googleusercontent.com",
     callback: (tokenResponse) => {
-      console.log("Token Response:", tokenResponse);
       var xhr = new XMLHttpRequest();
       xhr.open(
         "GET",
@@ -18,6 +17,7 @@ function Auth() {
         "Bearer " + tokenResponse.access_token
       );
       xhr.send();
+      console.log("Token Response:", tokenResponse);
     },
     scope: "https://www.googleapis.com/auth/calendar",
   });
