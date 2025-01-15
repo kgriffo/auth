@@ -19,7 +19,7 @@ function Auth() {
       );
       xhr.send();
     },
-    //scope: "openid email profile", //basic scope included since scope is required here
+    scope: "https://www.googleapis.com/auth/calendar.readonly",
   });
 
   // const googleLogin = useGoogleLogin({
