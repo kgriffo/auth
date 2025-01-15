@@ -6,25 +6,12 @@ function Auth() {
   const client = window.google.accounts.oauth2.initTokenClient({
     client_id:
       "248005865613-j5nc0j164et50emv7g18ap21l64bi07q.apps.googleusercontent.com",
-    callback: (tokenResponse) => {
-      console.log("Token Response:", tokenResponse);
-      fetchCalendarEvents(tokenResponse.access_token);
-    },
     scope:
       "openid email profile https://www.googleapis.com/auth/calendar.readonly",
+    callback: (tokenResponse) => {
+      console.log("Token Response:", tokenResponse);
+    },
   });
-
-  const fetchCalendarEvents = (accessToken) => {
-    // Fetch events from Google Calendar API
-    fetch("https://www.googleapis.com/calendar/v3/calendars/primary/events", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-  };
-
-  console.log(fetchCalendarEvents);
 
   // const googleLogin = useGoogleLogin({
   //   onSuccess: async (tokenResponse) => {
