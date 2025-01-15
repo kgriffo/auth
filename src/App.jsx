@@ -8,6 +8,16 @@ function Auth() {
       "248005865613-j5nc0j164et50emv7g18ap21l64bi07q.apps.googleusercontent.com",
     callback: (tokenResponse) => {
       console.log("Token Response:", tokenResponse);
+      var xhr = new XMLHttpRequest();
+      xhr.open(
+        "GET",
+        "https://www.googleapis.com/calendar/v3/calendars/primary/events"
+      );
+      xhr.setRequestHeader(
+        "Authorization",
+        "Bearer " + tokenResponse.access_token
+      );
+      xhr.send();
     },
     scope: "openid email profile", //basic scope included since scope is required here
   });
