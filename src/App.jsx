@@ -1,7 +1,7 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import "./App.css";
-import google from "react-oauth/google";
+import google from "@react-oauth/google";
 
 // gkjhgjh
 function Auth() {
