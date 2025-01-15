@@ -32,6 +32,8 @@ function Auth() {
   //   },
   //   onError: (errorResponse) => console.log(errorResponse),
   // });
+  console.log(client.requestAccessToken);
+
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
       <h1>Google OAuth Test</h1>
