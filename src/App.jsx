@@ -10,7 +10,8 @@ function Auth() {
     scope: "openid email profile", //basic scope included since scope is required here
   });
 
-  // client.requestAccessToken();
+  client.requestAccessToken();
+
   // const googleLogin = useGoogleLogin({
   //   onSuccess: async (tokenResponse) => {
   //     if (tokenResponse.authuser == "1") {
@@ -32,7 +33,6 @@ function Auth() {
   //   },
   //   onError: (errorResponse) => console.log(errorResponse),
   // });
-  console.log(client.requestAccessToken());
 
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
