@@ -1,28 +1,6 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import "./App.css";
-//Firebase (domain restriction)
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "",
-  authDomain: "winged-zodiac-447218-v1.firebaseapp.com",
-  projectId: "winged-zodiac-447218-v1",
-  storageBucket: "winged-zodiac-447218-v1.firebasestorage.app",
-  messagingSenderId: "248005865613",
-  appId: "1:248005865613:web:06f60deca71a522b1f72c4",
-  measurementId: "G-5XTNV6X59L",
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 
 function Auth() {
   const googleLogin = useGoogleLogin({
@@ -43,7 +21,6 @@ function Auth() {
           alert("Unauthorized user; login failed.");
         }, 100);
       }
-      console.log(analytics);
     },
     onError: (errorResponse) => console.log(errorResponse),
   });
