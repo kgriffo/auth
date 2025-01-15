@@ -8,7 +8,6 @@ function Auth() {
       "248005865613-j5nc0j164et50emv7g18ap21l64bi07q.apps.googleusercontent.com",
     callback: (tokenResponse) => {
       console.log("Token Response:", tokenResponse);
-      alert(`Token: ${tokenResponse.access_token}`);
     },
     scope: "openid email profile", //basic scope included since scope is required here
   });
