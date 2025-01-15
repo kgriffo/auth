@@ -7,20 +7,22 @@ function Auth() {
     client_id:
       "248005865613-j5nc0j164et50emv7g18ap21l64bi07q.apps.googleusercontent.com",
     callback: (tokenResponse) => {
-      var xhr = new XMLHttpRequest();
-      xhr.open(
-        "GET",
-        "https://www.googleapis.com/calendar/v3/calendars/primary/events"
-      );
-      xhr.setRequestHeader(
-        "Authorization",
-        "Bearer " + tokenResponse.access_token
-      );
-      xhr.send();
       console.log("Token Response:", tokenResponse);
+      fetchCalendarEvents(tokenResponse.access_token);
     },
-    scope: "https://www.googleapis.com/auth/calendar",
+    scope:
+      "openid email profile https://www.googleapis.com/auth/calendar.readonly",
   });
+
+  const fetchCalendarEvents = (accessToken) => {
+    // Fetch events from Google Calendar API
+    fetch("https://www.googleapis.com/calendar/v3/calendars/primary/events", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  };
 
   // const googleLogin = useGoogleLogin({
   //   onSuccess: async (tokenResponse) => {
