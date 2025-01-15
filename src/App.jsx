@@ -24,6 +24,8 @@ function Auth() {
     });
   };
 
+  console.log(fetchCalendarEvents);
+
   // const googleLogin = useGoogleLogin({
   //   onSuccess: async (tokenResponse) => {
   //     if (tokenResponse.authuser == "1") {
