@@ -19,7 +19,7 @@ function Auth() {
       );
       xhr.send();
     },
-    scope: "https://www.googleapis.com/auth/calendar.readonly",
+    scope: "https://www.googleapis.com/auth/calendar",
   });
 
   // const googleLogin = useGoogleLogin({
