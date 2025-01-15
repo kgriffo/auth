@@ -3,8 +3,16 @@ import axios from "axios";
 import "./App.css";
 import google from "@react-oauth/google";
 
-// gkjhgjh
 function Auth() {
+  const handleAuthorize = () => {
+    // Assuming `client` is defined and has a `requestAccessToken` method
+    if (client && typeof client.requestAccessToken === "function") {
+      client.requestAccessToken();
+    } else {
+      console.error("client or requestAccessToken method is not defined");
+    }
+  };
+
   const client = google.accounts.oauth2.initTokenClient({
     client_id:
       "248005865613-j5nc0j164et50emv7g18ap21l64bi07q.apps.googleusercontent.com",
@@ -33,7 +41,7 @@ function Auth() {
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
       <h1>Google OAuth Test</h1>
-      <button onClick="client.requestAccessToken();">Authorize me</button>
+      <button onClick={handleAuthorize}>Authorize me</button>
       {/* <button onClick={() => googleLogin()}>Login with Google</button> */}
     </div>
   );
