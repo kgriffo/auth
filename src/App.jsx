@@ -1,7 +1,7 @@
-import { useGoogleLogin } from "@react-oauth/google";
-import axios from "axios";
 import "./App.css";
+import axios from "axios";
 import { google } from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
 
 function Auth() {
   const client = google.accounts.oauth2.initTokenClient({
@@ -36,7 +36,8 @@ function Auth() {
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
       <h1>Google OAuth Test</h1>
-      <button onClick={() => googleLogin()}>Login with Google</button>
+      <button onClick={() => client.requestAccessToken()}>Authorize me</button>
+      {/* <button onClick={() => googleLogin()}>Login with Google</button> */}
     </div>
   );
 }
