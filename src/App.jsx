@@ -4,7 +4,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  PrivateRoute,
   Link,
   //Redirect,
   //useHistory,
@@ -43,9 +42,7 @@ function Auth() {
           <Switch>
             <Route path="/public">{/* <PublicPage /> */}</Route>
             <Route path="/login">{/* <LoginPage /> */}</Route>
-            <PrivateRoute path="/protected">
-              {/* <ProtectedPage /> */}
-            </PrivateRoute>
+            {/* <ProtectedPage /> */}
           </Switch>
         </div>
       </Router>
