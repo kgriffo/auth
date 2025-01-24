@@ -8,7 +8,7 @@ import {
   Redirect,
 } from "react-router-dom";
 
-const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children }) => {
   console.log("fired auth provider");
   const [isAuthenticated, setIsAuthenticated] = false;
   const token = localStorage.getItem("id_token");
