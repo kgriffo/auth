@@ -13,7 +13,7 @@ function Auth() {
     scope: "openid",
     callback: (tokenResponse) => {
       console.log("Token Response:", tokenResponse); //for testing
-      window.location.href = "#/protected";
+      window.location.href = "https://kgriffo.github.io/auth/#/protected";
     },
   });
 
@@ -22,10 +22,10 @@ function Auth() {
       <Router>
         <div>
           <Switch>
-            <Route path="#/public">
+            <Route path="https://kgriffo.github.io/auth/#/public">
               <h1>Public Page</h1>
             </Route>
-            <Route path="#/protected">
+            <Route path="https://kgriffo.github.io/auth/#/protected">
               <h1>Protected Page</h1>
             </Route>
           </Switch>
