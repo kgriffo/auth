@@ -1,19 +1,35 @@
 import "./App.css";
-import { HashRouter as Router, Switch, Route } from "react-router-dom";
-
-//import axios from "axios";
-//import { useGoogleLogin } from "@react-oauth/google";
+import { useEffect, useContext } from "react";
+import {
+  HashRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 
 function Auth() {
+  const [isAuthenticated, setIsAuthenticated] = useContext(false);
+
+  useEffect(() => {
+    // Check if token exists in localStorage (or sessionStorage)
+    const token = localStorage.getItem("id_token");
+    if (token) {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
   const client = window.google.accounts.oauth2.initTokenClient({
     client_id:
       "248005865613-j5nc0j164et50emv7g18ap21l64bi07q.apps.googleusercontent.com",
-    redirect_uri: "https://kgriffo.github.io/auth/#/protected",
+    redirect_uri: "https://kgriffo.github.io/auth/",
     response_type: "token id_token",
     scope: "openid",
     callback: (tokenResponse) => {
-      console.log("Token Response:", tokenResponse); //for testing
-      window.location.href = "https://kgriffo.github.io/auth/#/protected";
+      console.log("Token Response:", tokenResponse); // For debugging
+      if (tokenResponse && tokenResponse.id_token) {
+        localStorage.setItem("id_token", tokenResponse.id_token); // Store the token
+        setIsAuthenticated(true);
+      }
     },
   });
 
@@ -22,11 +38,12 @@ function Auth() {
       <Router>
         <div>
           <Switch>
-            <Route path="https://kgriffo.github.io/auth/#/public">
+            <Route path="/public">
               <h1>Public Page</h1>
             </Route>
-            <Route path="https://kgriffo.github.io/auth/#/protected">
-              <h1>Protected Page</h1>
+            <Route path="/protected" isAuthenticated={isAuthenticated}></Route>
+            <Route path="/">
+              <Redirect to="/public" />
             </Route>
           </Switch>
         </div>
@@ -34,7 +51,6 @@ function Auth() {
       <div style={{ textAlign: "center", marginTop: "50px" }}>
         <h1>Google OAuth Test</h1>
         <button onClick={() => client.requestAccessToken()}>Log in</button>
-        {/* <button onClick={() => googleLogin()}>Login with Google</button> */}
       </div>
     </>
   );
