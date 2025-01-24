@@ -12,30 +12,28 @@ function Auth() {
     response_type: "token id_token",
     scope: "openid",
     callback: (tokenResponse) => {
-      console.log("Token Response:", tokenResponse);
+      console.log("Token Response:", tokenResponse); //for testing
+      window.location.href = "/protected";
     },
   });
 
   return (
     <>
-      {/* <ProvideAuth> */}
       <Router>
         <div>
-          {/* <AuthButton /> */}
-
           <Switch>
-            <Route path="/public">{/* <PublicPage /> */}</Route>
-            <Route path="/protected">{/* <LoginPage /> */}</Route>
-            {/* <ProtectedPage /> */}
+            <Route path="/public">
+              <h1>Public Page</h1>
+            </Route>
+            <Route path="/protected">
+              <h1>Protected Page</h1>
+            </Route>
           </Switch>
         </div>
       </Router>
-      {/* </ProvideAuth> */}
       <div style={{ textAlign: "center", marginTop: "50px" }}>
         <h1>Google OAuth Test</h1>
-        <button onClick={() => client.requestAccessToken()}>
-          Authorize me
-        </button>
+        <button onClick={() => client.requestAccessToken()}>Log in</button>
         {/* <button onClick={() => googleLogin()}>Login with Google</button> */}
       </div>
     </>
