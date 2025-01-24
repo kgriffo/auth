@@ -13,7 +13,7 @@ function Auth() {
     scope: "openid",
     callback: (tokenResponse) => {
       console.log("Token Response:", tokenResponse); //for testing
-      window.location.href = "/protected";
+      window.location.href = "#/protected";
     },
   });
 
