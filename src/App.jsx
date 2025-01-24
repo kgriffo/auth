@@ -79,7 +79,7 @@ function Auth(setIsAuthenticated) {
   );
 }
 
-export { Auth, AuthProvider };
+export default { Auth, AuthProvider };
 
 // const googleLogin = useGoogleLogin({
 //   onSuccess: async (tokenResponse) => {
