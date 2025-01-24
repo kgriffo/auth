@@ -16,6 +16,7 @@ function Auth() {
     if (token) {
       setIsAuthenticated(true);
     }
+    console.log(isAuthenticated, "checking auth state in App.jsx");
   }, []);
 
   const client = window.google.accounts.oauth2.initTokenClient({
