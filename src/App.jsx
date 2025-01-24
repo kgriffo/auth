@@ -1,13 +1,5 @@
 import "./App.css";
-//import React, { useContext, createContext, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  //Redirect,
-  //useHistory,
-  //useLocation,
-} from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 
 //import axios from "axios";
 //import { useGoogleLogin } from "@react-oauth/google";
