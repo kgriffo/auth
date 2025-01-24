@@ -8,7 +8,7 @@ function Auth() {
   const client = window.google.accounts.oauth2.initTokenClient({
     client_id:
       "248005865613-j5nc0j164et50emv7g18ap21l64bi07q.apps.googleusercontent.com",
-    redirect_uri: "https://kgriffo.github.io/auth/protected",
+    redirect_uri: "https://kgriffo.github.io/auth/#/protected",
     response_type: "token id_token",
     scope: "openid",
     callback: (tokenResponse) => {
