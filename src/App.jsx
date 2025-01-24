@@ -1,5 +1,6 @@
+/* eslint-disable react/prop-types */
 import "./App.css";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, createContext } from "react";
 import {
   HashRouter as Router,
   Route,
@@ -7,16 +8,37 @@ import {
   Redirect,
 } from "react-router-dom";
 
-function Auth() {
-  const [isAuthenticated, setIsAuthenticated] = useContext(false);
+const AuthProvider = ({ children }) => {
+  console.log("fired auth provider");
+  const [isAuthenticated, setIsAuthenticated] = false;
+  const token = localStorage.getItem("id_token");
+  if (token) {
+    setIsAuthenticated(true);
+  }
+  console.log(isAuthenticated, "checking auth state in App.jsx");
+  return (
+    <AuthContext.Provider value={{ isAuthenticated, token }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
 
+const AuthContext = createContext();
+
+const UseAuth = () => {
+  console.log("fired use auth");
+  return useContext(AuthContext);
+};
+
+const { isAuthenticated } = UseAuth();
+
+function Auth(setIsAuthenticated) {
   useEffect(() => {
-    // Check if token exists in localStorage (or sessionStorage)
-    const token = localStorage.getItem("id_token");
-    if (token) {
-      setIsAuthenticated(true);
-    }
-    console.log(isAuthenticated, "checking auth state in App.jsx");
+    // const token = localStorage.getItem("id_token");
+    // if (token) {
+    //   setIsAuthenticated(true);
+    // }
+    // console.log(isAuthenticated, "checking auth state in App.jsx");
   }, []);
 
   const client = window.google.accounts.oauth2.initTokenClient({
@@ -57,7 +79,7 @@ function Auth() {
   );
 }
 
-export default Auth;
+export { Auth, AuthProvider };
 
 // const googleLogin = useGoogleLogin({
 //   onSuccess: async (tokenResponse) => {
