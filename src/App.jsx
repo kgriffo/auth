@@ -8,8 +8,7 @@ function Auth() {
   const client = window.google.accounts.oauth2.initTokenClient({
     client_id:
       "248005865613-j5nc0j164et50emv7g18ap21l64bi07q.apps.googleusercontent.com",
-    scope:
-      "openid email profile https://www.googleapis.com/auth/calendar.readonly",
+    scope: "openid",
     callback: (tokenResponse) => {
       console.log("Token Response:", tokenResponse);
     },
