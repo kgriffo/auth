@@ -22,10 +22,10 @@ function Auth() {
       <Router>
         <div>
           <Switch>
-            <Route path="/public">
+            <Route path="#/public">
               <h1>Public Page</h1>
             </Route>
-            <Route path="/protected">
+            <Route path="#/protected">
               <h1>Protected Page</h1>
             </Route>
           </Switch>
