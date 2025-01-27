@@ -34,12 +34,12 @@ const { isAuthenticated } = UseAuth();
 
 function Auth(setIsAuthenticated) {
   useEffect(() => {
-    // const token = localStorage.getItem("id_token");
-    // if (token) {
-    //   setIsAuthenticated(true);
-    // }
-    // console.log(isAuthenticated, "checking auth state in App.jsx");
-  }, []);
+    const token = localStorage.getItem("id_token");
+    if (token) {
+      setIsAuthenticated(true);
+    }
+    console.log(isAuthenticated, "checking auth state in App.jsx");
+  }, [setIsAuthenticated]);
 
   const client = window.google.accounts.oauth2.initTokenClient({
     client_id:
@@ -48,9 +48,9 @@ function Auth(setIsAuthenticated) {
     response_type: "token id_token",
     scope: "openid",
     callback: (tokenResponse) => {
-      console.log("Token Response:", tokenResponse); // For debugging
+      console.log("Token Response:", tokenResponse);
       if (tokenResponse && tokenResponse.id_token) {
-        localStorage.setItem("id_token", tokenResponse.id_token); // Store the token
+        localStorage.setItem("id_token", tokenResponse.id_token);
         setIsAuthenticated(true);
       }
     },
