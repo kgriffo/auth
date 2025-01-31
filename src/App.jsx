@@ -4,8 +4,8 @@ import { useEffect, useContext, createContext, useState, useRef } from "react";
 import {
   HashRouter as Router,
   Route,
-  Switch,
-  Redirect,
+  Routes,
+  Navigate,
 } from "react-router-dom";
 
 const AuthContext = createContext();
@@ -64,23 +64,20 @@ function Auth() {
   return (
     <>
       <Router>
-        <div>
-          <Switch>
-            <Route path="/public">
-              <h1>Public Page</h1>
-            </Route>
-            <Route path="/protected">
-              {isAuthenticated ? (
+        <Routes>
+          <Route path="/public" element={<h1>Public Page</h1>}></Route>
+          <Route
+            path="/protected"
+            element={
+              isAuthenticated ? (
                 <h1>Protected Page</h1>
               ) : (
-                <Redirect to="/public" />
-              )}
-            </Route>
-            <Route path="/">
-              <Redirect to="/public" />
-            </Route>
-          </Switch>
-        </div>
+                <Navigate to="/public" />
+              )
+            }
+          />
+          <Route path="*" element={<Navigate to="/public" />} />
+        </Routes>
       </Router>
       <div style={{ textAlign: "center", marginTop: "50px" }}>
         <h1>Google OAuth Test</h1>
