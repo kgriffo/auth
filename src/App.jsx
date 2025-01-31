@@ -92,7 +92,7 @@ function Auth() {
   );
 }
 
-export { Auth };
+export default { Auth };
 
 // const googleLogin = useGoogleLogin({
 //   onSuccess: async (tokenResponse) => {
