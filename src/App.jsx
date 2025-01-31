@@ -6,6 +6,7 @@ import {
   Route,
   Routes,
   Navigate,
+  useNavigate,
 } from "react-router-dom";
 
 const AuthContext = createContext();
@@ -36,6 +37,7 @@ const UseAuth = () => {
 function Auth() {
   const { isAuthenticated, setIsAuthenticated } = UseAuth();
   const clientRef = useRef(null);
+  const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("id_token");
     if (token) {
@@ -56,10 +58,11 @@ function Auth() {
         if (tokenResponse && tokenResponse.id_token) {
           localStorage.setItem("id_token", tokenResponse.id_token);
           setIsAuthenticated(true);
+          navigate("/protected");
         }
       },
     });
-  }, [setIsAuthenticated]);
+  }, [navigate, setIsAuthenticated]);
 
   return (
     <>
