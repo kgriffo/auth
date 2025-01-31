@@ -92,26 +92,4 @@ function Auth() {
   );
 }
 
-export default { Auth };
-
-// const googleLogin = useGoogleLogin({
-//   onSuccess: async (tokenResponse) => {
-//     if (tokenResponse.authuser == "1") {
-//       console.log(tokenResponse);
-//       const userInfo = await axios.get(
-//         "https://www.googleapis.com/oauth2/v3/userinfo",
-//         { headers: { Authorization: `Bearer ${tokenResponse.access_token}` } }
-//       );
-
-//       console.log(userInfo);
-//       alert("Login successful!");
-//     } else {
-//       console.log("Unauthorized user; login failed.");
-//       // Timeout needed to ensure Google login pop-up closes before alert appears
-//       setTimeout(() => {
-//         alert("Unauthorized user; login failed.");
-//       }, 100);
-//     }
-//   },
-//   onError: (errorResponse) => console.log(errorResponse),
-// });
+export default Auth;
