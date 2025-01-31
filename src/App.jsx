@@ -1,13 +1,7 @@
 /* eslint-disable react/prop-types */
 import "./App.css";
 import { useEffect, useContext, createContext, useState, useRef } from "react";
-import {
-  HashRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-  useNavigate,
-} from "react-router-dom";
+import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -66,22 +60,20 @@ function Auth() {
 
   return (
     <>
-      <Router>
-        <Routes>
-          <Route path="/public" element={<h1>Public Page</h1>}></Route>
-          <Route
-            path="/protected"
-            element={
-              isAuthenticated ? (
-                <h1>Protected Page</h1>
-              ) : (
-                <Navigate to="/public" />
-              )
-            }
-          />
-          <Route path="*" element={<Navigate to="/public" />} />
-        </Routes>
-      </Router>
+      <Routes>
+        <Route path="/public" element={<h1>Public Page</h1>}></Route>
+        <Route
+          path="/protected"
+          element={
+            isAuthenticated ? (
+              <h1>Protected Page</h1>
+            ) : (
+              <Navigate to="/public" />
+            )
+          }
+        />
+        <Route path="*" element={<Navigate to="/public" />} />
+      </Routes>
       <div style={{ textAlign: "center", marginTop: "50px" }}>
         <h1>Google OAuth Test</h1>
         <button onClick={() => clientRef.current?.requestAccessToken()}>
