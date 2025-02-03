@@ -61,22 +61,23 @@ function Auth() {
   return (
     <>
       <Routes>
-        <Route path="/public" element={<h1>Public Page</h1>}></Route>
+        <Route path="/public" 
+          element={
+            !isAuthenticated ? (
+              <h1>Public Page</h1>
+            ): (
+              <Navigate to="/protected"/>
+            )}
+         />
         <Route
           path="/protected"
-          element={
-            isAuthenticated ? (
-              <h1>Protected Page</h1>
-            ) : (
-              <Navigate to="/public" />
-            )
-          }
+          element={<h1>Protected Page</h1>}
         />
         <Route path="*" element={<Navigate to="/public" />} />
       </Routes>
       <div style={{ textAlign: "center", marginTop: "50px" }}>
         <h1>Google OAuth Test</h1>
-        <button onClick={() => clientRef.current?.requestAccessToken()}>
+        <button onClick={() => setIsAuthenticated(true)}>
           Log in
         </button>
       </div>
