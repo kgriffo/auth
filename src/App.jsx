@@ -49,7 +49,8 @@ function Auth() {
       scope: "openid",
       callback: (tokenResponse) => {
         console.log("Token Response:", tokenResponse);
-        if (tokenResponse && tokenResponse.id_token) {
+        if (tokenResponse) {
+          //&& tokenResponse.id_token
           localStorage.setItem("id_token", tokenResponse.id_token);
           setIsAuthenticated(true);
           navigate("/protected");
@@ -61,17 +62,17 @@ function Auth() {
   return (
     <>
       <Routes>
-        <Route path="/public" element={<h1>Public Page</h1>}></Route>
         <Route
-          path="/protected"
+          path="/public"
           element={
-            isAuthenticated ? (
-              <h1>Protected Page</h1>
+            !isAuthenticated ? (
+              <h1>Public Page</h1>
             ) : (
-              <Navigate to="/public" />
+              <Navigate to="/protected" />
             )
           }
         />
+        <Route path="/protected" element={<h1>Protected Page</h1>} />
         <Route path="*" element={<Navigate to="/public" />} />
       </Routes>
       <div style={{ textAlign: "center", marginTop: "50px" }}>
@@ -79,6 +80,16 @@ function Auth() {
         <button onClick={() => clientRef.current?.requestAccessToken()}>
           Log in
         </button>
+        <button
+          onClick={() => {
+            localStorage.removeItem("id_token");
+            setIsAuthenticated(false);
+            navigate("/public");
+          }}
+        >
+          Log out
+        </button>
+        {/* <button onClick={() => setIsAuthenticated(true)}>Log in</button> */}
       </div>
     </>
   );
