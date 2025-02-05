@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import "./App.css";
+import "./Protected.jsx";
 import { useEffect, useContext, createContext, useState, useRef } from "react";
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 
@@ -49,8 +50,10 @@ function Auth() {
       scope: "openid",
       callback: (tokenResponse) => {
         console.log("Token Response:", tokenResponse);
+        console.log(tokenResponse.id_token);
         if (tokenResponse) {
           //&& tokenResponse.id_token
+          console.log(tokenResponse.id_token);
           localStorage.setItem("id_token", tokenResponse.id_token);
           setIsAuthenticated(true);
           navigate("/protected");
