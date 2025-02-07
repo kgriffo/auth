@@ -1,6 +1,30 @@
 // MUI practice \\
+import * as React from "react";
 import FormatListBulleted from "@mui/icons-material/FormatListBulleted";
-import { Button, Grid2 } from "@mui/material";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid2";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+//import Box from "@mui/material/Box";
+
+const My_card = (
+  <React.Fragment>
+    <CardContent>
+      <Typography variant="h5" component="div">
+        Title
+      </Typography>
+      <Typography gutterBottom sx={{ color: "text.secondary", fontSize: 14 }}>
+        Body
+      </Typography>
+    </CardContent>
+    <CardActions>
+      <Button size="small">Left in for now</Button>
+    </CardActions>
+  </React.Fragment>
+);
 
 const data = [
   {
@@ -58,12 +82,18 @@ function Protected() {
       >
         Browse All
       </Button>
-      <Grid2 container spacing={2}>
-        <Grid2 size={8}>item</Grid2>
-        <Grid2 size={4}>item</Grid2>
-        <Grid2 size={4}>item</Grid2>
-        <Grid2 size={8}>item</Grid2>
-      </Grid2>
+
+      <Grid>
+        <Box sx={{ minWidth: 275 }}>
+          <Card variant="outlined">{My_card}</Card>
+        </Box>
+        <Box sx={{ minWidth: 275 }}>
+          <Card variant="outlined">{My_card}</Card>
+        </Box>
+        <Box sx={{ minWidth: 275 }}>
+          <Card variant="outlined">{My_card}</Card>
+        </Box>
+      </Grid>
     </>
   );
 }
