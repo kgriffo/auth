@@ -1,30 +1,12 @@
 // MUI practice \\
-import * as React from "react";
+import { SortByAlpha } from "@mui/icons-material";
 import FormatListBulleted from "@mui/icons-material/FormatListBulleted";
 import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid2";
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
+import Grid from "@mui/material/Grid2";
 import Typography from "@mui/material/Typography";
-//import Box from "@mui/material/Box";
-
-const My_card = (
-  <React.Fragment>
-    <CardContent>
-      <Typography variant="h5" component="div">
-        Title
-      </Typography>
-      <Typography gutterBottom sx={{ color: "text.secondary", fontSize: 14 }}>
-        Body
-      </Typography>
-    </CardContent>
-    <CardActions>
-      <Button size="small">Left in for now</Button>
-    </CardActions>
-  </React.Fragment>
-);
+import { useState } from "react";
 
 const data = [
   {
@@ -69,33 +51,68 @@ const data = [
   },
 ];
 
-data;
+const shuffle = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+};
 
-function Protected() {
+const Cards = () => {
+  const shuffledData = shuffle([...data]);
+  const sortedAZ = [...data].sort((a, b) => a.title.localeCompare(b.title));
+  const sortedZA = [...data].sort((a, b) => b.title.localeCompare(a.title));
+
+  return (
+    <Grid container spacing={3}>
+      {shuffledData.map((item, index) => (
+        <Grid item size={{ xs: 12, sm: 6, md: 4 }} key={index}>
+          <Card>
+            <CardContent>
+              <Typography variant="h5">{item.title}</Typography>
+              <Typography>{item.body}</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+      ))}
+    </Grid>
+  );
+};
+
+const Protected = () => {
+  const [showCards, setShowCards] = useState(false);
+  const [sortMode, setSortMode] = useState("AZ");
+
   return (
     <>
-      <Button
-        startIcon={<FormatListBulleted />}
-        onClick={() => {
-          console.log("This is a test");
-        }}
-      >
-        Browse All
-      </Button>
-
-      <Grid>
-        <Box sx={{ minWidth: 275 }}>
-          <Card variant="outlined">{My_card}</Card>
-        </Box>
-        <Box sx={{ minWidth: 275 }}>
-          <Card variant="outlined">{My_card}</Card>
-        </Box>
-        <Box sx={{ minWidth: 275 }}>
-          <Card variant="outlined">{My_card}</Card>
-        </Box>
+      <Grid container direction="row" spacing={2}>
+        <Button
+          startIcon={<FormatListBulleted />}
+          variant="contained"
+          onClick={() => {
+            console.log("Browse All clicked");
+            setShowCards(!showCards);
+          }}
+        >
+          Browse All
+        </Button>
+        <Button
+          startIcon={<SortByAlpha />}
+          variant="contained"
+          onClick={() => {
+            console.log("Sort clicked");
+            if (sortMode === "AZ") setSortMode("ZA");
+            else setSortMode("AZ");
+            console.log("sortMode: " + sortMode);
+          }}
+        >
+          Sort
+        </Button>
+        {showCards && <Cards />}
       </Grid>
     </>
   );
-}
+};
 
 export default Protected;
