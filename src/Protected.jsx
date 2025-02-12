@@ -7,6 +7,7 @@ import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid2";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 const data = [
   {
@@ -59,14 +60,11 @@ const shuffle = (array) => {
   return array;
 };
 
-const Cards = () => {
-  const shuffledData = shuffle([...data]);
-  const sortedAZ = [...data].sort((a, b) => a.title.localeCompare(b.title));
-  const sortedZA = [...data].sort((a, b) => b.title.localeCompare(a.title));
-
+const Cards = (props) => {
+  const { displayedData } = props;
   return (
     <Grid container spacing={3}>
-      {shuffledData.map((item, index) => (
+      {displayedData.map((item, index) => (
         <Grid item size={{ xs: 12, sm: 6, md: 4 }} key={index}>
           <Card>
             <CardContent>
@@ -82,7 +80,8 @@ const Cards = () => {
 
 const Protected = () => {
   const [showCards, setShowCards] = useState(false);
-  const [sortMode, setSortMode] = useState("AZ");
+  const [isAZ, setIsAZ] = useState(true);
+  const [displayedData, setDisplayedData] = useState(data);
 
   return (
     <>
@@ -91,8 +90,10 @@ const Protected = () => {
           startIcon={<FormatListBulleted />}
           variant="contained"
           onClick={() => {
-            console.log("Browse All clicked");
+            setDisplayedData(shuffle([...data]));
             setShowCards(!showCards);
+            console.log("'Browse All' clicked");
+            console.log("showCards: " + showCards);
           }}
         >
           Browse All
@@ -101,18 +102,35 @@ const Protected = () => {
           startIcon={<SortByAlpha />}
           variant="contained"
           onClick={() => {
-            console.log("Sort clicked");
-            if (sortMode === "AZ") setSortMode("ZA");
-            else setSortMode("AZ");
-            console.log("sortMode: " + sortMode);
+            if (isAZ) {
+              setDisplayedData(
+                [...data].sort((a, b) => a.title.localeCompare(b.title))
+              );
+            } else {
+              setDisplayedData(
+                [...data].sort((a, b) => b.title.localeCompare(a.title))
+              );
+            }
+            setIsAZ(!isAZ);
+            console.log("'Sort' clicked");
+            console.log("A-Z: " + isAZ);
           }}
         >
           Sort
         </Button>
-        {showCards && <Cards />}
+        {showCards && <Cards displayedData={displayedData} />}
       </Grid>
     </>
   );
+};
+
+Cards.PropTypes = {
+  displayedData: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      body: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 export default Protected;
