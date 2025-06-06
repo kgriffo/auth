@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+
+// Currently lets anyone in, more research needs to be done to figure out proper authentication. \\
 import "./App.css";
 import Protected from "./Protected.jsx";
 import { useEffect, useContext, createContext, useState, useRef } from "react";
