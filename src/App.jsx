@@ -3,6 +3,7 @@ import "./App.css";
 import "./Protected.jsx";
 import { useEffect, useContext, createContext, useState, useRef } from "react";
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
+import { Box, Button, Typography } from "@mui/material";
 
 const AuthContext = createContext();
 
@@ -63,27 +64,45 @@ function Auth() {
   }, [navigate, setIsAuthenticated]);
 
   return (
-    <>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "100vh",
+        width: "100%",
+        textAlign: "center",
+        gap: 3,
+      }}
+    >
       <Routes>
         <Route
           path="/public"
           element={
             !isAuthenticated ? (
-              <h1>Public Page</h1>
+              <Typography>Public Page</Typography>
             ) : (
               <Navigate to="/protected" />
             )
           }
         />
-        <Route path="/protected" element={<h1>Protected Page</h1>} />
+        <Route
+          path="/protected"
+          element={<Typography>Protected Page</Typography>}
+        />
         <Route path="*" element={<Navigate to="/public" />} />
       </Routes>
       <div style={{ textAlign: "center", marginTop: "50px" }}>
-        <h1>Google OAuth Test</h1>
-        <button onClick={() => clientRef.current?.requestAccessToken()}>
+        <Typography>Google OAuth Test</Typography>
+        <Button
+          variant="outlined"
+          onClick={() => clientRef.current?.requestAccessToken()}
+        >
           Log in
-        </button>
-        <button
+        </Button>
+        <Button
+          variant="outlined"
           onClick={() => {
             localStorage.removeItem("id_token");
             setIsAuthenticated(false);
@@ -91,10 +110,9 @@ function Auth() {
           }}
         >
           Log out
-        </button>
-        {/* <button onClick={() => setIsAuthenticated(true)}>Log in</button> */}
+        </Button>
       </div>
-    </>
+    </Box>
   );
 }
 
