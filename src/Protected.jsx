@@ -87,41 +87,43 @@ const Protected = () => {
     <Box sx={{ p: 3, display: "flex", flexDirection: "column", gap: 2 }}>
       <Typography>Protected Page</Typography>
 
-      <Button
-        startIcon={<FormatListBulleted />}
-        variant="contained"
-        onClick={() => {
-          setDisplayedData(shuffle([...data]));
-          setShowCards(!showCards);
-          console.log("'Browse All' clicked");
-          console.log("showCards: " + showCards);
-        }}
-      >
-        Browse All
-      </Button>
-
-      {showCards && (
+      <Box sx={{ display: "flex", gap: 2, width: "fit-content" }}>
         <Button
-          startIcon={<SortByAlpha />}
+          startIcon={<FormatListBulleted />}
           variant="contained"
           onClick={() => {
-            if (isAZ) {
-              setDisplayedData(
-                [...data].sort((a, b) => a.title.localeCompare(b.title))
-              );
-            } else {
-              setDisplayedData(
-                [...data].sort((a, b) => b.title.localeCompare(a.title))
-              );
-            }
-            setIsAZ(!isAZ);
-            console.log("'Sort' clicked");
-            console.log("A-Z: " + isAZ);
+            setDisplayedData(shuffle([...data]));
+            setShowCards(!showCards);
+            console.log("'Browse All' clicked");
+            console.log("showCards: " + showCards);
           }}
         >
-          Sort
+          Browse All
         </Button>
-      )}
+
+        {showCards && (
+          <Button
+            startIcon={<SortByAlpha />}
+            variant="contained"
+            onClick={() => {
+              if (isAZ) {
+                setDisplayedData(
+                  [...data].sort((a, b) => a.title.localeCompare(b.title))
+                );
+              } else {
+                setDisplayedData(
+                  [...data].sort((a, b) => b.title.localeCompare(a.title))
+                );
+              }
+              setIsAZ(!isAZ);
+              console.log("'Sort' clicked");
+              console.log("A-Z: " + isAZ);
+            }}
+          >
+            Sort
+          </Button>
+        )}
+      </Box>
 
       {showCards && <Cards displayedData={displayedData} />}
     </Box>
