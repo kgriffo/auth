@@ -6,7 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid2";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import { Box } from "@mui/material";
 
 const data = [
@@ -79,7 +79,7 @@ const Cards = (props) => {
 };
 
 const Protected = () => {
-  const [showCards, setShowCards] = useState(false);
+  const [isShowCards, setShowCards] = useState(false);
   const [isAZ, setIsAZ] = useState(true);
   const [displayedData, setDisplayedData] = useState(data);
 
@@ -93,15 +93,15 @@ const Protected = () => {
           variant="contained"
           onClick={() => {
             setDisplayedData(shuffle([...data]));
-            setShowCards(!showCards);
+            setShowCards(!isShowCards);
             console.log("'Browse All' clicked");
-            console.log("showCards: " + showCards);
+            console.log("isShowCards: " + isShowCards);
           }}
         >
           Browse All
         </Button>
 
-        {showCards && (
+        {isShowCards && (
           <Button
             startIcon={<SortByAlpha />}
             variant="contained"
@@ -125,16 +125,16 @@ const Protected = () => {
         )}
       </Box>
 
-      {showCards && <Cards displayedData={displayedData} />}
+      {isShowCards && <Cards displayedData={displayedData} />}
     </Box>
   );
 };
 
-Cards.PropTypes = {
-  displayedData: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      body: PropTypes.string.isRequired,
+Cards.propTypes = {
+  displayedData: propTypes.arrayOf(
+    propTypes.shape({
+      title: propTypes.string.isRequired,
+      body: propTypes.string.isRequired,
     })
   ).isRequired,
 };
