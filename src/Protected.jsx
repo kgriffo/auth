@@ -1,4 +1,3 @@
-// MUI practice \\
 import { SortByAlpha } from "@mui/icons-material";
 import FormatListBulleted from "@mui/icons-material/FormatListBulleted";
 import Button from "@mui/material/Button";
@@ -8,6 +7,7 @@ import Grid from "@mui/material/Grid2";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import { Box } from "@mui/material";
 
 const data = [
   {
@@ -84,20 +84,23 @@ const Protected = () => {
   const [displayedData, setDisplayedData] = useState(data);
 
   return (
-    <>
-      <Grid container direction="row" spacing={2}>
-        <Button
-          startIcon={<FormatListBulleted />}
-          variant="contained"
-          onClick={() => {
-            setDisplayedData(shuffle([...data]));
-            setShowCards(!showCards);
-            console.log("'Browse All' clicked");
-            console.log("showCards: " + showCards);
-          }}
-        >
-          Browse All
-        </Button>
+    <Box sx={{ p: 3, display: "flex", flexDirection: "column", gap: 2 }}>
+      <Typography>Protected Page</Typography>
+
+      <Button
+        startIcon={<FormatListBulleted />}
+        variant="contained"
+        onClick={() => {
+          setDisplayedData(shuffle([...data]));
+          setShowCards(!showCards);
+          console.log("'Browse All' clicked");
+          console.log("showCards: " + showCards);
+        }}
+      >
+        Browse All
+      </Button>
+
+      {showCards && (
         <Button
           startIcon={<SortByAlpha />}
           variant="contained"
@@ -118,9 +121,10 @@ const Protected = () => {
         >
           Sort
         </Button>
-        {showCards && <Cards displayedData={displayedData} />}
-      </Grid>
-    </>
+      )}
+
+      {showCards && <Cards displayedData={displayedData} />}
+    </Box>
   );
 };
 

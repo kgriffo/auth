@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import "./App.css";
-import "./Protected.jsx";
+import Protected from "./Protected.jsx";
 import { useEffect, useContext, createContext, useState, useRef } from "react";
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import { Box, Button, Typography } from "@mui/material";
@@ -89,7 +89,7 @@ function Auth() {
         />
         <Route
           path="/protected"
-          element={<Typography>Protected Page</Typography>}
+          element={isAuthenticated ? <Protected /> : <Navigate to="/public" />}
         />
         <Route path="*" element={<Navigate to="/public" />} />
       </Routes>
